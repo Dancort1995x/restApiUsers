@@ -1,8 +1,9 @@
 package com.example.users.rest.service;
 
 
+import com.example.users.rest.exception.GenericException;
 import com.example.users.rest.exception.ResourceNotFoundException;
-import com.example.users.rest.exception.UserNotFoundException;
+import com.example.users.rest.exception.UsersNotFoundException;
 import com.example.users.rest.model.Phone;
 import com.example.users.rest.model.User;
 import com.example.users.rest.repository.UserRepository;
@@ -16,7 +17,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +85,7 @@ public class UserServiceImplTest {
     void createUserFoundTest(){
         User userMock = getMockUser();
         Mockito.when(userRepository.findByEmail(Mockito.anyString())).thenReturn(Optional.of(userMock));
-        Assertions.assertThrows(RuntimeException.class,()-> userServiceImpl.createUser(userMock));
+        Assertions.assertThrows(GenericException.class,()-> userServiceImpl.createUser(userMock));
     }
 
     @Test
@@ -117,7 +117,7 @@ public class UserServiceImplTest {
     @Test
     void getAllUsersNotFound(){
         Mockito.when(userRepository.findAll()).thenReturn(new ArrayList<>());
-        Assertions.assertThrows(UserNotFoundException.class,()-> userServiceImpl.getAllUsers());
+        Assertions.assertThrows(UsersNotFoundException.class,()-> userServiceImpl.getAllUsers());
     }
 
     @Test

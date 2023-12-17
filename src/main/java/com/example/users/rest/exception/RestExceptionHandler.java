@@ -44,7 +44,7 @@ public class RestExceptionHandler{
     }
 
     @ExceptionHandler(PatternException.class)
-    public ResponseEntity<ApiResponse> handlerSecurityException(PatternException exception,
+    public ResponseEntity<ApiResponse> handlerPatternException(PatternException exception,
                                                                 WebRequest webRequest) {
         ApiResponse apiResponse = new ApiResponse(exception.getMessage(), webRequest.getDescription(false));
         return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -57,12 +57,18 @@ public class RestExceptionHandler{
         return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<ApiResponse> handlerSecurityException(UserNotFoundException exception,
+    @ExceptionHandler(UsersNotFoundException.class)
+    public ResponseEntity<ApiResponse> handlerUsersNotFoundException(UsersNotFoundException exception,
                                                                 WebRequest webRequest) {
         ApiResponse apiResponse = new ApiResponse(exception.getMessage(), webRequest.getDescription(false));
         return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(GenericException.class)
+    public ResponseEntity<ApiResponse> handlerGenericException(GenericException exception,
+                                                                     WebRequest webRequest) {
+        ApiResponse apiResponse = new ApiResponse(exception.getMessage(), webRequest.getDescription(false));
+        return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
 }

@@ -1,6 +1,8 @@
 package com.example.users.rest.utils;
 
 import com.example.users.rest.exception.PatternException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,8 @@ import java.util.regex.Pattern;
 
 @Component
 public class RegexUtil {
+
+    private static final Logger log = LoggerFactory.getLogger(RegexUtil.class);
 
     private final Map<String, String> regexPatterns = new HashMap<>();
 
@@ -27,6 +31,7 @@ public class RegexUtil {
     }
 
     public void validRegexPattern(String value, String key){
+        log.info("init regex valid : " + key);
         String regexPattern = regexPatterns.get(key);
         if (regexPattern == null) {
             throw new IllegalArgumentException("No se encontró un patrón para la clave: " + key);
@@ -37,6 +42,7 @@ public class RegexUtil {
         if (!matcher.matches()) {
             throw new PatternException(key);
         }
+        log.info("regex utils finish");
     }
 
 }
