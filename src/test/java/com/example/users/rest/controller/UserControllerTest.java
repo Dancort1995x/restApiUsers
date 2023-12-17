@@ -69,6 +69,18 @@ public class UserControllerTest {
     }
 
     @Test
+    void getAllUsers(){
+        User mockUser = getMockUser();
+        List<User> userList = new ArrayList<>();
+        userList.add(mockUser);
+        Mockito.when(userService.getAllUsers()).thenReturn(userList);
+        ResponseEntity<List<User>> response = userController.getAllUsers();
+        Assertions.assertNotNull(response.getBody());
+        Assertions.assertEquals(userList.get(0).getId(),response.getBody().get(0).getId());
+    }
+
+
+    @Test
     void updateUserTest(){
         User mockUser = getMockUser();
         Mockito.when(userService.getUserById(Mockito.anyString())).thenReturn(mockUser);

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/user")
 public class UserController {
@@ -19,6 +21,11 @@ public class UserController {
     public ResponseEntity<User> getUserDetails(@PathVariable String userId){
         User user = userService.getUserById(userId);
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/listAll")
+    public ResponseEntity<List<User>> getAllUsers(){
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PostMapping("/register")
@@ -38,7 +45,7 @@ public class UserController {
     @DeleteMapping("/{userId}")
     public ResponseEntity<String> deleteUserById (@PathVariable String userId){
         userService.deleteUserById(userId);
-        return ResponseEntity.ok("Usuario elminado con exito");
+        return ResponseEntity.ok().body("Usuario elminado con exito");
     }
 
 

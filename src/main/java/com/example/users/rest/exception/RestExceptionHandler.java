@@ -1,7 +1,6 @@
 package com.example.users.rest.exception;
 
-import com.example.users.rest.model.ApiResponse;
-import jakarta.el.MethodNotFoundException;
+import com.example.users.rest.model.response.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -43,5 +42,27 @@ public class RestExceptionHandler{
         ApiResponse apiResponse = new ApiResponse(exception.getMessage(), webRequest.getDescription(false));
         return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(PatternException.class)
+    public ResponseEntity<ApiResponse> handlerSecurityException(PatternException exception,
+                                                                WebRequest webRequest) {
+        ApiResponse apiResponse = new ApiResponse(exception.getMessage(), webRequest.getDescription(false));
+        return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ApiResponse> handlerIlegalException(IllegalArgumentException exception,
+                                                                WebRequest webRequest) {
+        ApiResponse apiResponse = new ApiResponse(exception.getMessage(), webRequest.getDescription(false));
+        return new ResponseEntity<>(apiResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ApiResponse> handlerSecurityException(UserNotFoundException exception,
+                                                                WebRequest webRequest) {
+        ApiResponse apiResponse = new ApiResponse(exception.getMessage(), webRequest.getDescription(false));
+        return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+    }
+
 
 }

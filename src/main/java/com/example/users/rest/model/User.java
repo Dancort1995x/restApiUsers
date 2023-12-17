@@ -15,9 +15,7 @@ public class User {
     @Id
     private String id;
     private String name;
-    @Pattern(regexp = "^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$",message = "Formato de email no válido")
     private String email;
-    @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d{2,}).*$",message = "Formato de contraseña no válido")
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL)

@@ -1,4 +1,4 @@
-package com.example.users.rest.model;
+package com.example.users.rest.model.response;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
