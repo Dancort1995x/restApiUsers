@@ -8,7 +8,7 @@ _Creacion de api rest para el registro de clientes_
 
 _Requisitos para inicializar el proyecto:_
 
-* Java 17 (openjdk)
+* Java 11 (openjdk)
 * Gradle
 * IDE a elección (de prefrencia Intellij)
 * Base de datos de memoria H2

@@ -3,13 +3,14 @@ package com.example.users.rest.controller;
 import com.example.users.rest.model.User;
 
 import com.example.users.rest.service.UserService;
-import jakarta.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController

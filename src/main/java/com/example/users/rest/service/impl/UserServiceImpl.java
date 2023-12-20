@@ -8,12 +8,13 @@ import com.example.users.rest.repository.UserRepository;
 import com.example.users.rest.service.UserService;
 import com.example.users.rest.utils.JwtUtil;
 import com.example.users.rest.utils.RegexUtil;
-import jakarta.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -33,6 +34,7 @@ public class UserServiceImpl implements UserService {
     private RegexUtil regexUtil;
 
 
+    @Override
     public User getUserById(String userId) {
         log.info("userId: " + userId);
         Optional<User> optionalUser = userRepository.findUserById(userId);
@@ -42,7 +44,7 @@ public class UserServiceImpl implements UserService {
         return optionalUser.get();
     }
 
-
+    @Override
     public List<User> getAllUsers(){
         List<User> userList = userRepository.findAll();
 
@@ -52,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
         return userList;
     }
-
+    @Override
     public User createUser(User user) {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
             throw new GenericException("Correo se encuentra registrado");
@@ -66,6 +68,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
 
     }
+
+    @Override
     @Transactional
     public User updateUser(String userId, User updatedUserData) {
         User existingUser = getUserById(userId);
@@ -84,6 +88,8 @@ public class UserServiceImpl implements UserService {
         return existingUser;
     }
 
+
+    @Override
     @Transactional
     public void deleteUserById(String userId) {
         getUserById(userId);
